@@ -7,6 +7,8 @@ import { UsersModule } from '../users/users.module';
 
 @Module({
     imports: [
+        ConfigModule,
+        UsersModule,
         JwtModule.registerAsync({
             imports: [ConfigModule],
             useFactory: (configService: ConfigService) => ({
@@ -17,7 +19,6 @@ import { UsersModule } from '../users/users.module';
             }),
             inject: [ConfigService],
         }),
-        UsersModule,
     ],
     providers: [AuthResolver, AuthService],
 })
