@@ -41,6 +41,7 @@ export class AuthService {
 
         const tokenPayload: TokenPayload = { userId: user.id };
         const token = this.jwtService.sign(tokenPayload);
+        console.log('here::: ', user, token);
         response.cookie('Authentication', token, {
             httpOnly: true,
             secure: this.configService.get('NODE_ENV') === environment.PROD,

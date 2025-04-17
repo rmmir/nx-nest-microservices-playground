@@ -5,10 +5,14 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtStrategy } from './auth/strategies/jwt.strategy';
 
 @Module({
     imports: [
-        ConfigModule,
+        ConfigModule.forRoot({
+            isGlobal: true,
+        }),
         PrismaModule,
         GraphQLModule.forRoot<ApolloDriverConfig>({
             driver: ApolloDriver,
@@ -17,6 +21,7 @@ import { AuthModule } from './auth/auth.module';
         }),
         UsersModule,
         AuthModule,
+        JwtModule,
     ],
     providers: [],
 })
